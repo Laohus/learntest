@@ -1,0 +1,93 @@
+body{
+    margin:0;
+    padding:0;
+    background-size: 100%, 100%;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255,255,255,0.8);
+
+}
+
+.menu{
+    position: absolute;
+    height: 100%;
+    width: 14%;
+    background-color: rgba(0,0,0,0.7);
+}
+.top-center{
+    position: absolute;
+    height: 10%;
+    width: 86%;
+    margin-left: 14%;
+    background-color: rgba(0,0,0,0.8);
+}
+.center{
+    position: absolute;
+    height: 88%;
+    width: 85.5%;
+    margin-left: 14%;
+    margin-top: 6%;
+    margin-bottom: 0;
+    background-color: lightgray;
+}
+.menu-title{
+    width: 100%;
+    height: 10%;
+    font-size: 25px;
+    color: white;
+    text-align: center;
+    border-bottom: 1px solid white;
+    line-height: 100px;
+}
+
+.menu-menu{
+    width: 100%;
+    height: 89%;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    line-height: 100px;
+}
+p{display: inline;}
+.menu-menu li{list-style-type:none;line-height: 50px;text-align: left;padding-left: 25px;}
+ul li{list-style-type:none;line-height: 50px;text-align: left;}
+li ul{list-style-type:none;font-size: 0;margin: 0;padding: 0;}
+.menu-menu a{color: white;text-decoration: none;font-size: 18px;padding-left: 20px;}
+
+li ul.level2{display: none}
+li:hover ul.level2{display: block;}
+
+.level1:hover{background-color: red}
+.level3:hover{background-color: red}
+
+.menu-vertor{text-align: center;vertical-align: middle;}
+
+.layui-tab-card{
+    height: 95%;
+}
+.Featurelist{
+    position: relative;
+    width: 10%;
+    height: 100%;
+    margin-left: 90%;
+}
+
+.loginout{
+    position: absolute;
+    margin-left: 50%;
+    margin-top: 13%;
+}
+.modpassword{
+    position: absolute;
+    display: none;
+    margin-top: 13%;
+}
+
+.Featurelist:hover .modpassword{display: block;}
+
+
+.Featurelist image{
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+}

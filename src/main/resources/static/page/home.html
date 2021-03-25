@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/popwindow.css">
+
+
+    <script src="../js/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/page.js"></script>
+
+
+    <script src="../layui/layui.js"></script>
+    <script src="layui/layui.all.js"></script>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+
+</head>
+<body>
+
+<div class="top-center">
+    <div class="Featurelist">
+        <a class="modpassword" id="modpassword"><img src="../images/menu/modpassword.png" alt=""></a>
+        <a class="loginout" href="/login"><img src="../images/menu/loginout.png" alt=""></a>
+    </div>
+
+</div>
+<div class="center">
+    <div class="moduser-1" id="moduser-1" style="display: none;z-index: 1">
+        <form action="" method="post" id="signinForm">
+            <div class="title">
+                <p>修改密码</p>
+                <img  class="close" id="close" src="../images/menu/close.png" alt="">
+            </div>
+            <div class="input-firstpassword">
+                <label>
+                    <input class="input-text" id="firstpassword" name="firstpassword" type="password" maxlength="12" placeholder="输入新密码" autocomplete="off" required>
+                </label><br>
+            </div>
+            <div class="input-secendpassword">
+                <label>
+                    <input class="input-text" id="secendpassword" name="secendpassword" type="password" maxlength="12" placeholder="输入确认密码" autocomplete="off" required>
+                </label><br>
+            </div>
+            <div class="button-add">
+                <input type="button" id="button" value="提&emsp;&emsp;交"><br>
+                <p class="error" id="error"></p><p class="message" id="message"></p>
+            </div>
+        </form>
+    </div>
+        <div class="layui-tab layui-tab-card" lay-filter="demo" lay-allowclose="true">
+            <ul class="layui-tab-title"></ul>
+            <div class="layui-tab-content" style="height: 92%;">
+<!--                <div class="moduser-1" id="moduser-1" style="display: none">-->
+<!--                    <form action="" method="post" id="signinForm">-->
+<!--                        <div class="title">-->
+<!--                            <p>修改密码</p>-->
+<!--                            <img  class="close" id="close" src="../images/menu/close.png" alt="">-->
+<!--                        </div>-->
+<!--                        <div class="input-firstpassword">-->
+<!--                            <label>-->
+<!--                                <input class="input-text" id="firstpassword" name="firstpassword" type="password" maxlength="12" placeholder="输入新密码" autocomplete="off" required>-->
+<!--                            </label><br>-->
+<!--                        </div>-->
+<!--                        <div class="input-secendpassword">-->
+<!--                            <label>-->
+<!--                                <input class="input-text" id="secendpassword" name="secendpassword" type="password" maxlength="12" placeholder="输入确认密码" autocomplete="off" required>-->
+<!--                            </label><br>-->
+<!--                        </div>-->
+<!--                        <div class="button-add">-->
+<!--                            <input type="button" id="button" value="提&emsp;&emsp;交"><br>-->
+<!--                            <p class="error" id="error"></p><p class="message" id="message"></p>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+            </div>
+        </div>
+</div>
+<div class="menu">
+    <div class="menu-title">
+        <p>欢迎来到主页</p><br>
+    </div>
+    <div class="menu-menu">
+        <li data-url="/user.html" class="level1 rightcenter" mytitle="用户"><img class="menu-vertor" src="../images/menu/user.png" alt=""><a>用户</a></li>
+        <li data-url="/setup.html" class="level1 rightcenter" mytitle="配置键"><img class="menu-vertor" src="../images/menu/setup.png" alt=""><a>配置键</a></li>
+        <li class=""><img class="menu-vertor" src="../images/menu/api.png" alt=""><a>接口自动化</a>
+            <ul class="level2">
+                <li class="level3 rightcenter" mytitle="接口自动化-项目"><a>项目</a></li>
+                <li class="level3 rightcenter" mytitle="接口自动化-执行计划"><a>执行计划</a></li>
+                <li class="level3 rightcenter" mytitle="接口自动化-用例"><a>用例</a></li>
+            </ul>
+        </li>
+        <li class=""><img class="menu-vertor" src="../images/menu/performance.png" alt=""><a>接口性能</a>
+            <ul class="level2">
+                <li class="level3 rightcenter" mytitle="接口性能-项目"><a>项目</a></li>
+                <li class="level3 rightcenter" mytitle="接口性能-执行计划"><a>执行计划</a></li>
+                <li class="level3 rightcenter" mytitle="接口性能-用例"><a>用例</a></li>
+            </ul>
+        </li>
+        <li class=""><img class="menu-vertor" src="../images/menu/ui.png" alt=""><a>web自动化</a>
+            <ul class="level2">
+                <li class="level3 rightcenter" mytitle="web自动化-项目"><a>项目</a></li>
+                <li class="level3 rightcenter" mytitle="web自动化-执行计划"><a>执行计划</a></li>
+                <li class="level3 rightcenter" mytitle="web自动化-用例"><a>用例</a></li>
+            </ul>
+        </li>
+        <li class=""><img class="menu-vertor" src="../images/menu/report.png" alt=""><a>报表生成</a>
+            <ul class="level2">
+                <li class="level3 rightcenter" mytitle="邮件"><a>邮件</a></li>
+                <li class="level3 rightcenter" mytitle="报告"><a>报告</a></li>
+            </ul>
+        </li>
+    </div>
+</div>
+
+<script>
+    layui.use('element', function(){
+        let $ = layui.jquery
+            ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //触发事件
+        let active = {
+            tabAdd: function(){
+                //新增一个Tab项
+                let htmlurl=$(this).attr('data-url');
+                let mytitle=$(this).attr('mytitle');
+                //先判断是否已经有了tab
+                let arrayObj = [];　//创建一个数组
+                $(".layui-tab-title").find('li').each(function() {
+                    let y = $(this).attr("lay-id");
+                    arrayObj.push(y);
+                });
+                let have=$.inArray(mytitle, arrayObj);  //返回 3,
+                if (have>=0) {
+                    //tab已有标签
+                    element.tabChange('demo', mytitle); //切换到当前点击的页面
+                } else{
+                    //没有相同tab
+                    element.tabAdd('demo', {
+                        title:mytitle //用于演示
+                        ,content: '<iframe style="width: 95%;height:90%; position: absolute;" src='+'page'+htmlurl+' ></iframe>'
+                        ,id: mytitle //实际使用一般是规定好的id，这里以时间戳模拟下
+                    })
+                    element.tabChange('demo', mytitle); //切换到当前点击的页面
+                }
+            }
+
+        };
+        $(".rightcenter").click(function(){
+            let type="tabAdd";
+            let othis = $(this);
+            active[type] ? active[type].call(this, othis) : '';
+        });
+
+    });
+</script>
+
+</body>
+</html>

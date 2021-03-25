@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>用户信息</title>
+
+    <link rel="stylesheet" href="../css/userinfo.css">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+
+</head>
+<body>
+<div class="userinfo">
+    <div class="layui-btn layui-btn-lg layui-btn-normal"><a href="">新增</a></div>
+    <div class="layui-btn layui-btn-lg layui-btn-danger"><a href="">删除</a></div>
+    </div>
+</div>
+<div>
+    <form action="" method="post" class="add">
+        <div class="title">
+            <span>新增用户</span>
+            <img class="close" id="close" src="../images/menu/close.png" alt="">
+        </div>
+        <div class="add-input">
+            <label>
+                <span>用户姓名</span><input type="text">
+            </label><br>
+            <label>
+                <span>邮箱</span><input type="email">
+            </label><br>
+            <label>
+                <span>年龄</span><input type="number">
+            </label><br>
+            <label>
+                <span>性别</span><select name="性别" id="">
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+            </label><br>
+            <label>
+                <span>岗位职称</span><input type="text">
+            </label><br>
+            <label>
+                <span>所属业务线</span><input type="text">
+            </label><br>
+            <label>
+                <input type="button" value="提&emsp;&emsp;交">
+            </label>
+
+        </div>
+
+    </form>
+</div>
+<div class="user-data">
+    <table id="usertable" lay-filter="test"></table>
+</div>
+
+
+<script src="../layui/layui.js"></script>
+<script>
+    layui.use('table', function(){
+        let table = layui.table;
+        //第一个实例
+        table.render({
+            elem: '#usertable'
+            ,height: 312
+            ,url: '/query/userdata' //数据接口
+            ,page: true //开启分页
+            ,loading:true
+            ,cols: [[ //表头
+                {type:'checkbox'}
+                ,{field: 'id', title: 'ID',width:80, sort: true}
+                ,{field: 'name', title: '用户名', sort: true}
+                ,{field: 'sex', title: '性别',width:80}
+                ,{field: 'age', title: '年龄',width:80}
+                ,{field: 'email', title: '邮箱'}
+                ,{field: 'jobs', title: '岗位职称'}
+                ,{field: 'lines', title: '业务线'}
+                ,{field: "cratetime", title: '创建时间', sort: true,templet:"<div>{{layui.util.toDateString(d.updateTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+            ]]
+        });
+
+    });
+</script>
+</body>
+</html>
