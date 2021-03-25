@@ -36,6 +36,7 @@
                     <input type="email" name="email" lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input" required/>
                 </label>
             </div>
+            <div class="layui-form-mid layui-word-aux">默认密码为：123456</div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">年龄</label>
@@ -99,7 +100,7 @@
                 ,{field: 'email', title: '邮箱'}
                 ,{field: 'jobs', title: '岗位职称'}
                 ,{field: 'lines', title: '业务线'}
-                ,{field: "cratetime", title: '创建时间', sort: true,templet:"<div>{{layui.util.toDateString(d.updateTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+                ,{field: "cratetime", title: '创建时间',templet:"<div>{{layui.util.toDateString(d.updateTime, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
             ]]
         });
 
