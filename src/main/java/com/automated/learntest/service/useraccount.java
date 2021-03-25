@@ -49,6 +49,14 @@ public class useraccount {
 
     }
 
+    /*查询用户数据总数 */
+    public Integer selectuser(){
+
+        String select = "SELECT count(*) from `user`";
+        return jdbcTemplate.queryForObject(select,Integer.class);
+
+    }
+
 
 
 }

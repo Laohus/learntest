@@ -7,47 +7,71 @@
     <link rel="stylesheet" href="../css/userinfo.css">
     <link rel="stylesheet" href="../layui/css/layui.css" media="all">
 
+    <script src="../js/userinfo.js"></script>
+
 </head>
 <body>
 <div class="userinfo">
-    <div class="layui-btn layui-btn-lg layui-btn-normal"><a href="">新增</a></div>
-    <div class="layui-btn layui-btn-lg layui-btn-danger"><a href="">删除</a></div>
-    </div>
+    <div class="layui-btn layui-btn-lg layui-btn-normal" id="add"><a>新增</a></div>
+    <div class="layui-btn layui-btn-lg layui-btn-danger" id="del" onclick="del()"><a>删除</a></div>
 </div>
-<div>
-    <form action="" method="post" class="add">
-        <div class="title">
-            <span>新增用户</span>
-            <img class="close" id="close" src="../images/menu/close.png" alt="">
-        </div>
-        <div class="add-input">
-            <label>
-                <span>用户姓名</span><input type="text">
-            </label><br>
-            <label>
-                <span>邮箱</span><input type="email">
-            </label><br>
-            <label>
-                <span>年龄</span><input type="number">
-            </label><br>
-            <label>
-                <span>性别</span><select name="性别" id="">
-                <option value="男">男</option>
-                <option value="女">女</option>
-            </select>
-            </label><br>
-            <label>
-                <span>岗位职称</span><input type="text">
-            </label><br>
-            <label>
-                <span>所属业务线</span><input type="text">
-            </label><br>
-            <label>
-                <input type="button" value="提&emsp;&emsp;交">
-            </label>
 
+<div id="user-content" class="user-content" style="background-color: white;display: none">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>新增用户</legend>
+    </fieldset>
+    <form class="layui-form layui-form-pane" action="" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户姓名</label>
+            <div class="layui-input-block">
+                <label>
+                    <input type="text" name="username" autocomplete="off" placeholder="请输入用户名" class="layui-input" required/>
+                </label>
+            </div>
         </div>
-
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-inline">
+                <label>
+                    <input type="email" name="email" lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input" required/>
+                </label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">年龄</label>
+            <div class="layui-input-inline">
+                <label>
+                    <input type="number" name="age" placeholder="请输入年龄" autocomplete="off" class="layui-input" min="0" max="100" required/>
+                </label>
+            </div>
+        </div>
+        <div class="layui-form-item" pane="">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="男" title="男" checked="">
+                <input type="radio" name="sex" value="女" title="女">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">岗位职称</label>
+            <div class="layui-input-block">
+                <label>
+                    <input type="text" name="position" autocomplete="off" placeholder="请输入职称" class="layui-input" required/>
+                </label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属业务线</label>
+            <div class="layui-input-block">
+                <label>
+                    <input type="text" name="line" autocomplete="off" placeholder="请输入业务线" class="layui-input" required/>
+                </label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit="" lay-filter="demo2">提&emsp;&emsp;交</button>
+            <button type="reset" class="layui-btn layui-btn-primary" id="close">关&emsp;&emsp;闭</button>
+        </div>
     </form>
 </div>
 <div class="user-data">
@@ -80,6 +104,13 @@
         });
 
     });
+    function del(){
+        layer.confirm('确认删除吗？', {
+            btn: ['确认'] //按钮
+        }, function(){
+            layer.msg('删除成功', {icon: 1});
+        });
+    }
 </script>
 </body>
 </html>

@@ -40,8 +40,10 @@ public class Userdata extends Responseinfo {
 
 
         select = userService.selectuser(n,limit);
+        Integer count = userService.selectuser();
 
         result.setCode(getSUCCESS_CODE());
+        result.setCount(count);
         result.setMsg(getACCOUNT_SUCCESS());
         result.setErrormsg("");
 

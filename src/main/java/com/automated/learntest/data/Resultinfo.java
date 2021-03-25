@@ -9,6 +9,9 @@ public class Resultinfo {
     //响应状态
     private String code;
 
+    //总数
+    private Integer count;
+
     //响应错误消息
     private String msg;
 
@@ -20,6 +23,14 @@ public class Resultinfo {
 
     public static ObjectMapper getMapper(){
         return MAPPER;
+    }
+
+    public Integer getCount(){
+        return count;
+    }
+
+    public void setCount(Integer count){
+        this.count=count;
     }
 
     public String getCode(){
