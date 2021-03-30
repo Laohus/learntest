@@ -1,16 +1,18 @@
 package com.automated.learntest.service;
 
+import com.alibaba.fastjson.JSONArray;
+import com.automated.learntest.data.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @Service
-public class useraccount {
+public class useraccount extends User {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -42,9 +44,9 @@ public class useraccount {
     }
 
     /*查询用户数据 */
-    public List<Map<String, Object>> selectuser(int n, String m){
+    public List<Map<String, Object>> selectuser(int page, int limit){
 
-        String select = String.format("SELECT * FROM `user` LIMIT %s , %s;", n,m);
+        String select = String.format("SELECT * FROM `user` LIMIT %s , %s;",  (page-1)*limit,page*limit);
         return jdbcTemplate.queryForList(select);
 
     }
@@ -57,6 +59,31 @@ public class useraccount {
 
     }
 
+    /*添加用户数据 */
+    public boolean adduser(Map<String, String> temap){
+
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        String select = String.format("INSERT into`user` (`name`,`password`,`cratetime`,`email`,`age`,`sex`,`lines`,`jobs`) VALUES(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\");",
+                temap.get("username"),getADD_PASSWORD(),formatter.format(date),temap.get("email"),temap.get("age"),temap.get("sex"),temap.get("position"),temap.get("line"));
+        return jdbcTemplate.update(select)>0;
+
+    }
+
+
+    /*删除用户数据 */
+    public boolean deluser(JSONArray listtmp){
+
+        for (Object name : listtmp) {
+            String select = String.format("DELETE FROM `user` WHERE `name`=\"%s\";", name);
+            if (jdbcTemplate.update(select) == 0) {
+                return false;
+            }
+        }
+        return true;
+
+    }
 
 
 }

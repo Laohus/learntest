@@ -1,7 +1,7 @@
 window.onload=function () {
-    var listenopen=document.getElementById("modpassword");
-    var closeopen=document.getElementById("close");
-    var open=document.getElementById("moduser-1");
+    const listenopen = document.getElementById("modpassword");
+    const closeopen = document.getElementById("close");
+    const open = document.getElementById("moduser-1");
 
     listenopen.addEventListener("click",function () {
         open.style.display = "block";
@@ -16,8 +16,8 @@ $(document).ready(function() {
 
     // 修改密码
     $("#button").click(function() {
-        var firstpassword=$("#firstpassword").val();
-        var secendpassword=$("#secendpassword").val();
+        const firstpassword = $("#firstpassword").val();
+        const secendpassword = $("#secendpassword").val();
 
         if (firstpassword.length===0 || secendpassword.length===0){
             $("#message").text("");

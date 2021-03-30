@@ -7,25 +7,26 @@
     <link rel="stylesheet" href="../css/userinfo.css">
     <link rel="stylesheet" href="../layui/css/layui.css" media="all">
 
+    <script src="../js/jquery.min.js" type="text/javascript"></script>
     <script src="../js/userinfo.js"></script>
 
 </head>
 <body>
 <div class="userinfo">
     <div class="layui-btn layui-btn-lg layui-btn-normal" id="add"><a>新增</a></div>
-    <div class="layui-btn layui-btn-lg layui-btn-danger" id="del" onclick="del()"><a>删除</a></div>
+    <div class="layui-btn layui-btn-lg layui-btn-danger" lay-filter="del" id="del" lay-event="del"><a>删除</a></div>
 </div>
 
 <div id="user-content" class="user-content" style="background-color: white;display: none">
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
         <legend>新增用户</legend>
     </fieldset>
-    <form class="layui-form layui-form-pane" action="" method="post">
+    <form class="layui-form layui-form-pane" lay-filter="userinfo" id="formadd" method="post">
         <div class="layui-form-item">
             <label class="layui-form-label">用户姓名</label>
             <div class="layui-input-block">
                 <label>
-                    <input type="text" name="username" autocomplete="off" placeholder="请输入用户名" class="layui-input" required/>
+                    <input type="text" name="username" id="username" autocomplete="off" lay-verify="required" placeholder="请输入用户名" class="layui-input">
                 </label>
             </div>
         </div>
@@ -33,7 +34,7 @@
             <label class="layui-form-label">邮箱</label>
             <div class="layui-input-inline">
                 <label>
-                    <input type="email" name="email" lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input" required/>
+                    <input type="email" name="email" id="email" lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
                 </label>
             </div>
             <div class="layui-form-mid layui-word-aux">默认密码为：123456</div>
@@ -42,22 +43,22 @@
             <label class="layui-form-label">年龄</label>
             <div class="layui-input-inline">
                 <label>
-                    <input type="number" name="age" placeholder="请输入年龄" autocomplete="off" class="layui-input" min="0" max="100" required/>
+                    <input type="number" name="age" id="age" placeholder="请输入年龄" lay-verify="required" autocomplete="off" class="layui-input" min="0" max="100">
                 </label>
             </div>
         </div>
         <div class="layui-form-item" pane="">
             <label class="layui-form-label">性别</label>
             <div class="layui-input-block">
-                <input type="radio" name="sex" value="男" title="男" checked="">
-                <input type="radio" name="sex" value="女" title="女">
+                <input type="radio" name="sex"  id="sex-man" value="男" title="男" checked="">
+                <input type="radio" name="sex" id="sex-women" value="女" title="女">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">岗位职称</label>
             <div class="layui-input-block">
                 <label>
-                    <input type="text" name="position" autocomplete="off" placeholder="请输入职称" class="layui-input" required/>
+                    <input type="text" name="position" id="position" lay-verify="required" autocomplete="off" placeholder="请输入职称" class="layui-input">
                 </label>
             </div>
         </div>
@@ -65,18 +66,18 @@
             <label class="layui-form-label">所属业务线</label>
             <div class="layui-input-block">
                 <label>
-                    <input type="text" name="line" autocomplete="off" placeholder="请输入业务线" class="layui-input" required/>
+                    <input type="text" name="line" id="line" lay-verify="required" autocomplete="off" placeholder="请输入业务线" class="layui-input">
                 </label>
             </div>
         </div>
         <div class="layui-form-item">
-            <button class="layui-btn" lay-submit="" lay-filter="demo2">提&emsp;&emsp;交</button>
+            <button type="button" lay-event="layadd" class="layui-btn" id="LAY-component-form-setval" lay-submit lay-filter="addinfo">提&emsp;&emsp;交</button>
             <button type="reset" class="layui-btn layui-btn-primary" id="close">关&emsp;&emsp;闭</button>
         </div>
     </form>
 </div>
 <div class="user-data">
-    <table id="usertable" lay-filter="test"></table>
+    <table id="usertable" lay-filter="usersinfo"></table>
 </div>
 
 
@@ -84,16 +85,18 @@
 <script>
     layui.use('table', function(){
         let table = layui.table;
+        const $ = layui.jquery;
         //第一个实例
         table.render({
             elem: '#usertable'
-            ,height: 312
             ,url: '/query/userdata' //数据接口
             ,page: true //开启分页
             ,loading:true
+            ,id:'usersinfo'
             ,cols: [[ //表头
                 {type:'checkbox'}
-                ,{field: 'id', title: 'ID',width:80, sort: true}
+                ,{type: 'numbers',title: '序号',align:'center',width:60}
+                // ,{field: '', title: 'ID',width:80, sort: true}
                 ,{field: 'name', title: '用户名', sort: true}
                 ,{field: 'sex', title: '性别',width:80}
                 ,{field: 'age', title: '年龄',width:80}
@@ -104,14 +107,54 @@
             ]]
         });
 
-    });
-    function del(){
-        layer.confirm('确认删除吗？', {
-            btn: ['确认'] //按钮
-        }, function(){
-            layer.msg('删除成功', {icon: 1});
+        $(document).on('click','#LAY-component-form-setval',function (){
+            setTimeout(function (){table.reload('usersinfo',{where:{}, page:{curr:1}})},2000)
         });
-    }
+
+        const json = {};
+        table.on('checkbox(usersinfo)',function (){
+
+            let checkStatus = table.checkStatus('usersinfo');
+            const  namelist=[];
+            for(let i=0; i<checkStatus.data.length; i++){
+                namelist.push(checkStatus.data[i].name)
+            }
+
+            json["name"]=namelist;
+            json["count"]=checkStatus.data.length;
+
+        });
+
+        $(document).on('click','#del',function (){
+            $.ajax({
+                url:"/del/userinfo",
+                type:"POST",
+                datatype:"JSON",
+                contentType:"application/json",
+                data:JSON.stringify(json),
+                success:function (data) {
+                    if(data.code==="0"){
+                        layer.confirm("删除用户成功！", {
+                            btn: ['确认']
+                        });
+                        setTimeout(function (){table.reload('usersinfo',{where:{}, page:{curr:1}})},2000);
+                        return true;
+                    }else {
+                        layer.confirm(data.errormsg, {
+                            btn: ['确认']
+                        });
+                        return false;
+
+                    }
+
+                }
+            })
+
+        });
+
+    });
+
 </script>
+
 </body>
 </html>

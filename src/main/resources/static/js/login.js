@@ -2,8 +2,8 @@ $(document).ready(function() {
 
     // 用户登录
     $("#buttonlogin").click(function() {
-        var username=$("#username").val();
-        var password=$("#password").val();
+        const username = $("#username").val();
+        const password = $("#password").val();
 
         if (username.length===0 || password.length===0){
             $("input[ type='text']").val("");

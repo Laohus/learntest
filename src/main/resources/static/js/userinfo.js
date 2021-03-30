@@ -1,7 +1,8 @@
+
 window.onload=function () {
-    var listenopen=document.getElementById("add");
-    var closeopen=document.getElementById("close");
-    var open=document.getElementById("user-content");
+    const listenopen = document.getElementById("add");
+    const closeopen = document.getElementById("close");
+    const open = document.getElementById("user-content");
 
     listenopen.addEventListener("click",function () {
         open.style.display = "block";
@@ -12,3 +13,33 @@ window.onload=function () {
     })
 }
 
+$(document).ready(function() {
+
+    $("#LAY-component-form-setval").click(function() {
+
+        $.ajax({
+            url:"/add/userinfo",
+            type:"POST",
+            datatype:"JSON",
+            data: $('#formadd').serialize(),
+            success:function (data) {
+                if(data.code==="0"){
+                    layer.confirm("新增用户成功！", {
+                        btn: ['确认']
+                    });
+
+                    return true;
+                }else {
+                    layer.confirm(data.errormsg, {
+                        btn: ['确认']
+                    });
+                    return false;
+
+                }
+
+            }
+        })
+
+    });
+
+});

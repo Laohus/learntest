@@ -34,12 +34,12 @@
             </div>
             <div class="input-firstpassword">
                 <label>
-                    <input class="input-text" id="firstpassword" name="firstpassword" type="password" maxlength="12" placeholder="输入新密码" autocomplete="off" required>
+                    <input class="input-text" id="firstpassword" name="firstpassword" lay-verify="required" type="password" maxlength="12" placeholder="输入新密码" autocomplete="off">
                 </label><br>
             </div>
             <div class="input-secendpassword">
                 <label>
-                    <input class="input-text" id="secendpassword" name="secendpassword" type="password" maxlength="12" placeholder="输入确认密码" autocomplete="off" required>
+                    <input class="input-text" id="secendpassword" name="secendpassword" lay-verify="required" type="password" maxlength="12" placeholder="输入确认密码" autocomplete="off">
                 </label><br>
             </div>
             <div class="button-add">
@@ -59,33 +59,33 @@
         <p>欢迎来到主页</p><br>
     </div>
     <div class="menu-menu">
-        <li data-url="/user.html" class="level1 rightcenter" mytitle="用户"><img class="menu-vertor" src="../images/menu/user.png" alt=""><a>用户</a></li>
-        <li data-url="/setup.html" class="level1 rightcenter" mytitle="配置键"><img class="menu-vertor" src="../images/menu/setup.png" alt=""><a>配置键</a></li>
+        <li data-url="/user.html" class="level1 content-center" mytitle="用户"><img class="menu-vertor" src="../images/menu/user.png" alt=""><a>用户</a></li>
+        <li data-url="/setup.html" class="level1 content-center" mytitle="配置键"><img class="menu-vertor" src="../images/menu/setup.png" alt=""><a>配置键</a></li>
         <li class=""><img class="menu-vertor" src="../images/menu/api.png" alt=""><a>接口自动化</a>
             <ul class="level2">
-                <li class="level3 rightcenter" mytitle="接口自动化-项目"><a>项目</a></li>
-                <li class="level3 rightcenter" mytitle="接口自动化-执行计划"><a>执行计划</a></li>
-                <li class="level3 rightcenter" mytitle="接口自动化-用例"><a>用例</a></li>
+                <li class="level3 content-center" mytitle="接口自动化-项目"><a>项目</a></li>
+                <li class="level3 content-center" mytitle="接口自动化-执行计划"><a>执行计划</a></li>
+                <li class="level3 content-center" mytitle="接口自动化-用例"><a>用例</a></li>
             </ul>
         </li>
         <li class=""><img class="menu-vertor" src="../images/menu/performance.png" alt=""><a>接口性能</a>
             <ul class="level2">
-                <li class="level3 rightcenter" mytitle="接口性能-项目"><a>项目</a></li>
-                <li class="level3 rightcenter" mytitle="接口性能-执行计划"><a>执行计划</a></li>
-                <li class="level3 rightcenter" mytitle="接口性能-用例"><a>用例</a></li>
+                <li class="level3 content-center" mytitle="接口性能-项目"><a>项目</a></li>
+                <li class="level3 content-center" mytitle="接口性能-执行计划"><a>执行计划</a></li>
+                <li class="level3 content-center" mytitle="接口性能-用例"><a>用例</a></li>
             </ul>
         </li>
         <li class=""><img class="menu-vertor" src="../images/menu/ui.png" alt=""><a>web自动化</a>
             <ul class="level2">
-                <li class="level3 rightcenter" mytitle="web自动化-项目"><a>项目</a></li>
-                <li class="level3 rightcenter" mytitle="web自动化-执行计划"><a>执行计划</a></li>
-                <li class="level3 rightcenter" mytitle="web自动化-用例"><a>用例</a></li>
+                <li class="level3 content-center" mytitle="web自动化-项目"><a>项目</a></li>
+                <li class="level3 content-center" mytitle="web自动化-执行计划"><a>执行计划</a></li>
+                <li class="level3 content-center" mytitle="web自动化-用例"><a>用例</a></li>
             </ul>
         </li>
         <li class=""><img class="menu-vertor" src="../images/menu/report.png" alt=""><a>报表生成</a>
             <ul class="level2">
-                <li class="level3 rightcenter" mytitle="邮件"><a>邮件</a></li>
-                <li class="level3 rightcenter" mytitle="报告"><a>报告</a></li>
+                <li class="level3 content-center" mytitle="邮件"><a>邮件</a></li>
+                <li class="level3 content-center" mytitle="报告"><a>报告</a></li>
             </ul>
         </li>
     </div>
@@ -124,12 +124,11 @@
             }
 
         };
-        $(".rightcenter").click(function(){
+        $(".content-center").click(function(){
             let type="tabAdd";
             let othis = $(this);
             active[type] ? active[type].call(this, othis) : '';
         });
-
     });
 </script>
 

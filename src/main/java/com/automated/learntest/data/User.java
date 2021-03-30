@@ -33,6 +33,9 @@ public class User {
     @Column
     private String sex;
 
+    //用户初始密码
+    private String ADD_PASSWORD="123456";
+
 
     public String getName() {
         return name;
@@ -63,5 +66,12 @@ public class User {
         return sex;
     }
     public void setSex(String sex) { this.sex = sex; }
+
+    public String getADD_PASSWORD(){
+        return ADD_PASSWORD;
+    }
+    public void setADD_PASSWORD(String ADD_PASSWORD){
+        this.ADD_PASSWORD=ADD_PASSWORD;
+    }
 
 }
