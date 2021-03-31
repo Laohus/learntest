@@ -2,28 +2,28 @@ package com.automated.learntest.controller;
 
 import com.automated.learntest.data.Responseinfo;
 import com.automated.learntest.data.Resultinfo;
-import com.automated.learntest.service.useraccount;
+import com.automated.learntest.Dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import sun.misc.BASE64Decoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller
+@RestController
 @ResponseBody
 public class Moduser extends Responseinfo {
 
+    private UserDao userService;
+
     @Autowired
-    private useraccount userService;
+    public void setUserService (UserDao userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping("/login/account")
     public Resultinfo loginhome (HttpServletRequest request){
@@ -33,7 +33,7 @@ public class Moduser extends Responseinfo {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        Map<String, String> umap = new HashMap<String,String>();
+        Map<String, String> umap = new HashMap<>();
         umap.put("username",username);
         umap.put("password",password);
 
@@ -46,23 +46,21 @@ public class Moduser extends Responseinfo {
                 session.setAttribute(username,umap);
                 result.setCode(getSUCCESS_CODE());
                 result.setMsg(getACCOUNT_SUCCESS());
-                return result;
             }else {
                 result.setCode(getFAIL_CODE());
                 result.setErrormsg(getACCOUNT_ERROR());
-                return result;
             }
         }else {
             result.setCode(getFAIL_CODE());
             result.setErrormsg(getACCOUNT_NO_FOUND());
-            return result;
 
         }
+        return result;
 
     }
 
     @RequestMapping("/home/edituser")
-    public Resultinfo modpassword(HttpServletRequest request) throws IOException {
+    public Resultinfo modpassword(HttpServletRequest request){
 
         Resultinfo result = new Resultinfo();
         HttpSession session = request.getSession();
@@ -74,15 +72,6 @@ public class Moduser extends Responseinfo {
             return result;
         }
 
-//        int count=request.getHeader("Cookie").indexOf("SESSION=");
-//        String Cookiebase=request.getHeader("Cookie").substring(8+count);
-//        byte[] bytes = new BASE64Decoder().decodeBuffer(Cookiebase);
-//        String Cookie = new String(bytes, StandardCharsets.UTF_8);
-//        if(!Cookie.equals(session.getId())){
-//            result.setCode(getFAIL_CODE());
-//            result.setErrormsg(getSESSION_TIMEOUT());
-//            return result;
-//        }
 
         String firstpassword = request.getParameter("firstpassword");
         String secendpassword = request.getParameter("secendpassword");
@@ -92,12 +81,12 @@ public class Moduser extends Responseinfo {
             return result;
         }
 
-        Map<String, String> umap = new HashMap<String,String>();
+        Map<String, String> umap = new HashMap<>();
 
 
         Enumeration<String> attrs = session.getAttributeNames();
         while(attrs.hasMoreElements()){
-            username = attrs.nextElement().toString();
+            username = attrs.nextElement();
         }
         Map tmpMap =(Map) session.getAttribute(username);
         umap.put("password",firstpassword);
@@ -109,18 +98,16 @@ public class Moduser extends Responseinfo {
             if(res==1){
                 result.setCode(getSUCCESS_CODE());
                 result.setMsg(getACCOUNT_SUCCESS());
-                return result;
             }else {
                 result.setCode(getFAIL_CODE());
                 result.setErrormsg(getACCOUNT_ERROR());
-                return result;
             }
 
         }else {
             result.setCode(getFAIL_CODE());
             result.setErrormsg(getEDITACCOUNT_NEWOLD_SAME());
-            return result;
         }
+        return result;
 
     }
 }

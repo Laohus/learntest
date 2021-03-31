@@ -3,9 +3,8 @@ package com.automated.learntest.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.automated.learntest.data.Responseinfo;
 import com.automated.learntest.data.Resultinfo;
-import com.automated.learntest.service.useraccount;
+import com.automated.learntest.Dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,14 +15,19 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 
-@Controller
 @ResponseBody
+@RestController
 public class Userdata extends Responseinfo {
 
+    private UserDao userService;
+
     @Autowired
-    private useraccount userService;
+    public void setUserService (UserDao userService) {
+        this.userService = userService;
+    }
 
 
     @RequestMapping("/query/userdata")

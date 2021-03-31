@@ -1,4 +1,4 @@
-package com.automated.learntest.service;
+package com.automated.learntest.Dao;
 
 import com.alibaba.fastjson.JSONArray;
 import com.automated.learntest.data.User;
@@ -12,10 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class useraccount extends User {
+public class UserDao extends User {
+
+
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    public void setJdbcTemplate (JdbcTemplate JdbcTemplate) {
+        this.jdbcTemplate = JdbcTemplate;
+    }
 
 
     /*用户名查询*/
@@ -66,7 +71,7 @@ public class useraccount extends User {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         String select = String.format("INSERT into`user` (`name`,`password`,`cratetime`,`email`,`age`,`sex`,`lines`,`jobs`) VALUES(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\");",
-                temap.get("username"),getADD_PASSWORD(),formatter.format(date),temap.get("email"),temap.get("age"),temap.get("sex"),temap.get("position"),temap.get("line"));
+                temap.get("username"),getADD_PASSWORD(),formatter.format(date),temap.get("email"),temap.get("age"),temap.get("sex"),temap.get("line"),temap.get("position"));
         return jdbcTemplate.update(select)>0;
 
     }
