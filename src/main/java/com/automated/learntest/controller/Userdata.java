@@ -31,7 +31,7 @@ public class Userdata extends Responseinfo {
 
 
     @RequestMapping("/query/userdata")
-    public Resultinfo queryuser(HttpServletRequest request){
+    public Resultinfo GetUser(HttpServletRequest request){
 
         Resultinfo result = new Resultinfo();
 
@@ -41,22 +41,22 @@ public class Userdata extends Responseinfo {
         int limits = Integer.parseInt(limit);
 
         List<Map<String, Object>> select;
-        List<Object> listdata = new ArrayList<>();
+        List<Object> listData = new ArrayList<>();
 
 
-        select = userService.selectuser(pages,limits);
-        Integer count = userService.selectuser();
+        select = userService.QueryUserData(pages,limits);
+        Integer count = userService.UserCount();
 
         result.setCode(getSUCCESS_CODE());
         result.setCount(count);
         result.setMsg(getACCOUNT_SUCCESS());
         result.setErrormsg("");
 
-        for (Map<String, Object> userdatum : select) {
-            JSONObject jsonObject = (JSONObject) JSONObject.toJSON(userdatum);
-            listdata.add(jsonObject);
+        for (Map<String, Object> UserDatum : select) {
+            JSONObject jsonObject = (JSONObject) JSONObject.toJSON(UserDatum);
+            listData.add(jsonObject);
         }
-        result.setData(listdata);
+        result.setData(listData);
         return result;
     }
 
@@ -64,18 +64,18 @@ public class Userdata extends Responseinfo {
     public Resultinfo adduser(HttpServletRequest request){
 
         Resultinfo result = new Resultinfo();
-        Map<String,String> tmmap = new HashMap<>();
-        tmmap.put("username",request.getParameter("username"));
-        tmmap.put("email",request.getParameter("email"));
-        tmmap.put("age",request.getParameter("age"));
-        tmmap.put("sex",request.getParameter("sex"));
-        tmmap.put("position",request.getParameter("position"));
-        tmmap.put("line",request.getParameter("line"));
+        Map<String,String> TeMap = new HashMap<>();
+        TeMap.put("username",request.getParameter("username"));
+        TeMap.put("email",request.getParameter("email"));
+        TeMap.put("age",request.getParameter("age"));
+        TeMap.put("sex",request.getParameter("sex"));
+        TeMap.put("position",request.getParameter("position"));
+        TeMap.put("line",request.getParameter("line"));
 
-        String name = userService.queryusername(tmmap);
+        String name = userService.QueryUser(request.getParameter("username"));
 
         if(name.equals("0")){
-            Boolean res = userService.adduser(tmmap);
+            Boolean res = userService.adduser(TeMap);
             if(res.equals(true)){
                 result.setCode(getSUCCESS_CODE());
                 result.setMsg(getACCOUNT_SUCCESS());
@@ -95,13 +95,13 @@ public class Userdata extends Responseinfo {
 
 
     @RequestMapping("/del/userinfo")
-    public Resultinfo deluser(@RequestBody JSONObject data){
+    public Resultinfo DelUser(@RequestBody JSONObject data){
 
         Resultinfo result = new Resultinfo();
-        JSONArray listtmp;
-        listtmp = data.getJSONArray("name");
+        JSONArray User;
+        User = data.getJSONArray("name");
 
-        boolean res = userService.deluser(listtmp);
+        boolean res = userService.DelUser(User);
         if(res){
             result.setCode(getSUCCESS_CODE());
             result.setMsg(getACCOUNT_SUCCESS());

@@ -16,22 +16,22 @@ $(document).ready(function() {
 
     // 修改密码
     $("#button").click(function() {
-        const firstpassword = $("#firstpassword").val();
-        const secendpassword = $("#secendpassword").val();
+        const FirstPassword = $("#FirstPassword").val();
+        const SecondPassword = $("#SecondPassword").val();
 
-        if (firstpassword.length===0 || secendpassword.length===0){
+        if (FirstPassword.length===0 || SecondPassword.length===0){
             $("#message").text("");
             $("input[ type='text']").val("");
             $("#error").text("密码不能为空");
             return false;
         }
-        if (firstpassword==="NULL" || secendpassword==="NULL"){
+        if (FirstPassword==="NULL" || SecondPassword==="NULL"){
             $("#message").text("");
             $("input[ type='text']").val("");
             $("#error").text("密码不能为特殊字符");
             return false;
         }
-        if (firstpassword==="null" || secendpassword==="null"){
+        if (FirstPassword==="null" || SecondPassword==="null"){
             $("#message").text("");
             $("input[ type='text']").val("");
             $("#error").text("密码不能为特殊字符");
@@ -39,7 +39,7 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url:"/home/edituser",
+            url:"/Home/ModUser",
             type:"POST",
             datatype:"JSON",
             data: $('#signinForm').serialize(),

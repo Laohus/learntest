@@ -24,65 +24,65 @@ public class UserDao extends User {
 
 
     /*用户名查询*/
-    public String queryusername(Map<String,String> map){
+    public String QueryUser(String username){
 
-        String sqlaccount =String.format("SELECT COUNT(*) FROM `user` WHERE NAME=\"%s\";",
-                map.get("username"));
-        return jdbcTemplate.queryForObject(sqlaccount,String.class);
+        String Key =String.format("SELECT COUNT(*) FROM `user` WHERE NAME=\"%s\";",
+                username);
+        return jdbcTemplate.queryForObject(Key,String.class);
     }
 
     /*用户名和密码查询 */
-    public String queryuserpassword(Map<String,String> map){
+    public String QueryUserPass(String username,String password){
 
-        String sql =String.format("SELECT COUNT(*) FROM `user` WHERE NAME=\"%s\" AND PASSWORD=\"%s\";",
-                map.get("username"),map.get("password"));
-        return jdbcTemplate.queryForObject(sql,String.class);
+        String Key =String.format("SELECT COUNT(*) FROM `user` WHERE NAME=\"%s\" AND PASSWORD=\"%s\";",
+                username,password);
+        return jdbcTemplate.queryForObject(Key,String.class);
     }
 
     /*修改密码 */
-    public int modpassword(Map<String,String> map){
+    public int ModUser(String username,String NewPassword){
 
-        String Modpassword =String.format("UPDATE `user` SET PASSWORD=\"%s\" WHERE NAME=\"%s\";",
-                map.get("password"),map.get("username"));
-        return jdbcTemplate.update(Modpassword);
+        String Key =String.format("UPDATE `user` SET PASSWORD=\"%s\" WHERE NAME=\"%s\";",
+                NewPassword,username);
+        return jdbcTemplate.update(Key);
 
     }
 
     /*查询用户数据 */
-    public List<Map<String, Object>> selectuser(int page, int limit){
+    public List<Map<String, Object>> QueryUserData(int page, int limit){
 
-        String select = String.format("SELECT * FROM `user` LIMIT %s , %s;",  (page-1)*limit,page*limit);
-        return jdbcTemplate.queryForList(select);
+        String Key = String.format("SELECT * FROM `user` LIMIT %s , %s;",  (page-1)*limit,page*limit);
+        return jdbcTemplate.queryForList(Key);
 
     }
 
     /*查询用户数据总数 */
-    public Integer selectuser(){
+    public Integer UserCount(){
 
-        String select = "SELECT count(*) from `user`";
-        return jdbcTemplate.queryForObject(select,Integer.class);
+        String Key = "SELECT count(*) from `user`";
+        return jdbcTemplate.queryForObject(Key,Integer.class);
 
     }
 
     /*添加用户数据 */
-    public boolean adduser(Map<String, String> temap){
+    public boolean adduser(Map<String, String> UserData){
 
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        String select = String.format("INSERT into`user` (`name`,`password`,`cratetime`,`email`,`age`,`sex`,`lines`,`jobs`) VALUES(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\");",
-                temap.get("username"),getADD_PASSWORD(),formatter.format(date),temap.get("email"),temap.get("age"),temap.get("sex"),temap.get("line"),temap.get("position"));
-        return jdbcTemplate.update(select)>0;
+        String Key = String.format("INSERT into`user` (`name`,`password`,`CreationTime`,`email`,`age`,`sex`,`lines`,`jobs`) VALUES(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\");",
+                UserData.get("username"),getADD_PASSWORD(),formatter.format(date),UserData.get("email"),UserData.get("age"),UserData.get("sex"),UserData.get("line"),UserData.get("position"));
+        return jdbcTemplate.update(Key)>0;
 
     }
 
 
     /*删除用户数据 */
-    public boolean deluser(JSONArray listtmp){
+    public boolean DelUser(JSONArray User){
 
-        for (Object name : listtmp) {
-            String select = String.format("DELETE FROM `user` WHERE `name`=\"%s\";", name);
-            if (jdbcTemplate.update(select) == 0) {
+        for (Object name : User) {
+            String Key = String.format("DELETE FROM `user` WHERE `name`=\"%s\";", name);
+            if (jdbcTemplate.update(Key) == 0) {
                 return false;
             }
         }
