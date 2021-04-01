@@ -5,21 +5,19 @@ $(document).ready(function() {
         const username = $("#username").val();
         const password = $("#password").val();
 
-        if (username.length===0 || password.length===0){
+        if (IsEmpty(username)===false || IsEmpty(password)===false){
+            $("#message").text("");
             $("input[ type='text']").val("");
-            $("#error").text("账户信息不能为空");
+            $("#error").text("密码不能为空");
             return false;
         }
-        if (username==="NULL" || password==="NULL"){
-            $("input[ type='text']").val("");
-            $("#error").text("账户信息不能为特殊字符");
-            return false;
-        }
-        if (username==="null" || password==="null"){
+        if (IsNotNull(username)===false || IsNotNull(password)===false){
+            $("#message").text("");
             $("input[ type='text']").val("");
             $("#error").text("密码不能为特殊字符");
             return false;
         }
+
 
         $.ajax({
             url:"/login/account",

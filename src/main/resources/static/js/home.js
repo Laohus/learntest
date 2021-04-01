@@ -12,6 +12,7 @@ window.onload=function () {
     })
 }
 
+
 $(document).ready(function() {
 
     // 修改密码
@@ -19,19 +20,13 @@ $(document).ready(function() {
         const FirstPassword = $("#FirstPassword").val();
         const SecondPassword = $("#SecondPassword").val();
 
-        if (FirstPassword.length===0 || SecondPassword.length===0){
+        if (IsEmpty(FirstPassword)===false || IsEmpty(SecondPassword)===false){
             $("#message").text("");
             $("input[ type='text']").val("");
             $("#error").text("密码不能为空");
             return false;
         }
-        if (FirstPassword==="NULL" || SecondPassword==="NULL"){
-            $("#message").text("");
-            $("input[ type='text']").val("");
-            $("#error").text("密码不能为特殊字符");
-            return false;
-        }
-        if (FirstPassword==="null" || SecondPassword==="null"){
+        if (IsNotNull(FirstPassword)===false || IsNotNull(SecondPassword)===false){
             $("#message").text("");
             $("input[ type='text']").val("");
             $("#error").text("密码不能为特殊字符");
