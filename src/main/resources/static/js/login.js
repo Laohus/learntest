@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     // 用户登录
-    $("#buttonlogin").click(function() {
+    $("#ButtonLogin").click(function() {
         const username = $("#username").val();
         const password = $("#password").val();
 
@@ -25,7 +25,7 @@ $(document).ready(function() {
             url:"/login/account",
             type:"POST",
             datatype:"JSON",
-            data: $('#formlogin').serialize(),
+            data: $('#FormLogin').serialize(),
             success:function (data) {
                 if(data.code==="0"){
                     $("#error").text("");

@@ -22,7 +22,7 @@ public class LoginPage extends Responseinfo {
     public String LoginOut(HttpSession session, SessionStatus sessionStatus){
         session.invalidate();
         sessionStatus.setComplete();
-        return "login";
+        return "redirect:login";
     }
 
 }
