@@ -25,7 +25,7 @@ public class Responseinfo {
 
     private String EDITACCOUNT_ERROR="修改密码失败";
 
-    private String SESSION_TIMEOUT="SESSION已过期，请重新登陆！";
+    private String SESSION_TIMEOUT="会话已失效,请重新登陆!";
 
     private String MISSING_PARAMETER="缺失必填参数";
 
