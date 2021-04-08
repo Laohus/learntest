@@ -12,7 +12,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         HttpSession session = request.getSession();
-        if (session.getAttribute("username") == null && session.getId()==null) {
+        if (session.getAttribute("username") == null || session.getId()==null) {
             request.getRequestDispatcher("/login").forward(request, response);
             return false;
         }

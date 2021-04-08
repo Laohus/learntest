@@ -29,6 +29,8 @@ public class Responseinfo {
 
     private String MISSING_PARAMETER="缺失必填参数";
 
+    private String NOT_ADMIN="非管理员账户不允许修改账户信息！";
+
     public String getSUCCESS_CODE(){
         return SUCCESS_CODE;
     }
@@ -124,6 +126,14 @@ public class Responseinfo {
 
     public void setMISSING_PARAMETER(String MISSING_PARAMETER){
         this.MISSING_PARAMETER=MISSING_PARAMETER;
+    }
+
+    public String getNOT_ADMIN(){
+        return NOT_ADMIN;
+    }
+
+    public void setNOT_ADMIN(String NOT_ADMIN){
+        this.NOT_ADMIN=NOT_ADMIN;
     }
 
 }

@@ -12,14 +12,18 @@ body{
     position: absolute;
     height: 100%;
     width: 14%;
-    background-color: rgba(0,0,0,0.7);
+    background: #bdc3c7;
+    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);
+    background: linear-gradient(to right, #2c3e50, #bdc3c7);
 }
 .top-center{
     position: absolute;
     height: 10%;
     width: 86%;
     margin-left: 14%;
-    background-color: rgba(0,0,0,0.8);
+    background: #bdc3c7;
+    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);
+    background: linear-gradient(to right, #2c3e50, #bdc3c7);
 }
 .center{
     position: absolute;
@@ -38,6 +42,7 @@ body{
     text-align: center;
     border-bottom: 1px solid white;
     line-height: 100px;
+    font-weight:bold;
 }
 
 .menu-menu{
@@ -52,13 +57,13 @@ p{display: inline;}
 .menu-menu li{list-style-type:none;line-height: 50px;text-align: left;padding-left: 25px;}
 ul li{list-style-type:none;line-height: 50px;text-align: left;}
 li ul{list-style-type:none;font-size: 0;margin: 0;padding: 0;}
-.menu-menu a{color: white;text-decoration: none;font-size: 18px;padding-left: 20px;}
+.menu-menu a{color: white;text-decoration: none;font-size: 18px;padding-left: 20px;font-weight:bold;}
 
 li ul.level2{display: none}
 li:hover ul.level2{display: block;}
 
-.level1:hover{background-color: red}
-.level3:hover{background-color: red}
+.level1:hover{background-color: #EEB058}
+.level3:hover{background-color: #EEB058}
 
 .menu-vertor{text-align: center;vertical-align: middle;}
 

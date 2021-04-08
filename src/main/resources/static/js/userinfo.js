@@ -13,33 +13,52 @@ window.onload=function () {
     })
 }
 
-$(document).ready(function() {
-
-    $("#LAY-component-form-setval").click(function() {
-
-        $.ajax({
-            url:"/add/userinfo",
-            type:"POST",
-            datatype:"JSON",
-            data: $('#formadd').serialize(),
-            success:function (data) {
-                if(data.code==="0"){
-                    layer.confirm("新增用户成功！", {
-                        btn: ['确认']
-                    });
-
-                    return true;
-                }else {
-                    layer.confirm(data.errormsg, {
-                        btn: ['确认']
-                    });
-                    return false;
-
-                }
-
-            }
-        })
-
-    });
-
-});
+// $(document).ready(function() {
+//
+//
+//
+//     $("#LAY-component-form-setval").click(function() {
+//
+//         $.ajax({
+//             url:"/add/userinfo",
+//             type:"POST",
+//             datatype:"JSON",
+//             data: $('#formadd').serialize(),
+//             success:function (data) {
+//                 if(data.code==="0"){
+//
+//                     layer.open({
+//                         content: '新增用户成功！',
+//                         yes: function(index, layero){
+//                             layer.close(index);
+//
+//                             document.getElementById("user-content").style.display="none";
+//                             document.getElementById("username").value="";
+//                             document.getElementById("password").value="";
+//                             document.getElementById("email").value="";
+//                             document.getElementById("age").value="";
+//                             document.getElementById("position").value="";
+//                             document.getElementById("line").value="";
+//
+//                         }
+//                     });
+//                     return true;
+//                 }else {
+//
+//                     layer.open({
+//                         content: data.errormsg,
+//                         yes: function(index, layero){
+//                             layer.close(index);
+//                         }
+//                     });
+//                     return false;
+//
+//                 }
+//
+//             }
+//         })
+//
+//     });
+//
+//
+// });

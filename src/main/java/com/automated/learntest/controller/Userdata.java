@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.alibaba.fastjson.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -61,11 +62,21 @@ public class Userdata extends Responseinfo {
     }
 
     @RequestMapping("/add/userinfo")
-    public Resultinfo adduser(HttpServletRequest request){
+    public Resultinfo adduser(HttpServletRequest request, HttpSession session){
 
         Resultinfo result = new Resultinfo();
         Map<String,String> TeMap = new HashMap<>();
+
+        String sessionUsername = (String) session.getAttribute("username");
+        if (!sessionUsername.equals("admin")){
+            result.setCode(getFAIL_CODE());
+            result.setErrormsg(getNOT_ADMIN());
+            return result;
+        }
+
+
         TeMap.put("username",request.getParameter("username"));
+        TeMap.put("password",request.getParameter("password"));
         TeMap.put("email",request.getParameter("email"));
         TeMap.put("age",request.getParameter("age"));
         TeMap.put("sex",request.getParameter("sex"));
@@ -94,10 +105,64 @@ public class Userdata extends Responseinfo {
     }
 
 
-    @RequestMapping("/del/userinfo")
-    public Resultinfo DelUser(@RequestBody JSONObject data){
+    @RequestMapping("/mod/userinfo")
+    public Resultinfo moduser(@RequestBody JSONObject User, HttpSession session){
 
         Resultinfo result = new Resultinfo();
+        String sessionUsername = (String) session.getAttribute("username");
+        if (!sessionUsername.equals("admin")){
+            result.setCode(getFAIL_CODE());
+            result.setErrormsg(getNOT_ADMIN());
+            return result;
+        }
+
+        Map<String,String> TeMap = new HashMap<>();
+        TeMap.put("username", User.getString("name"));
+        TeMap.put("password",User.getString("password"));
+        TeMap.put("email",User.getString("email"));
+        TeMap.put("line",User.getString("line"));
+
+
+        String ResultMod = userService.QueryUserPass(User.getString("name"),
+                User.getString("password"));
+        if(ResultMod.equals("1")){
+            result.setCode(getFAIL_CODE());
+            result.setErrormsg(getEDITACCOUNT_NEWOLD_SAME());
+            return result;
+        }
+
+        String count = userService.QueryUser(User.getString("name"));
+        if(count.equals("1")){
+            Boolean res = userService.ModUser(TeMap);
+            if(res.equals(true)){
+                result.setCode(getSUCCESS_CODE());
+                result.setMsg(getACCOUNT_SUCCESS());
+                result.setErrormsg("");
+            }else {
+                result.setCode(getFAIL_CODE());
+                result.setErrormsg(getACCOUNT_ERROR());
+            }
+
+        }else {
+            result.setCode(getFAIL_CODE());
+            result.setErrormsg(getACCOUNT__FOUNDED());
+        }
+        return result;
+
+    }
+
+    @RequestMapping("/del/userinfo")
+    public Resultinfo DelUser(@RequestBody JSONObject data, HttpSession session){
+
+        Resultinfo result = new Resultinfo();
+
+        String sessionUsername = (String) session.getAttribute("username");
+        if (!sessionUsername.equals("admin")){
+            result.setCode(getFAIL_CODE());
+            result.setErrormsg(getNOT_ADMIN());
+            return result;
+        }
+
         JSONArray User;
         User = data.getJSONArray("name");
 

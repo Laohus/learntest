@@ -45,10 +45,11 @@ public class UserDao extends User {
     }
 
     /*修改密码 */
-    public int ModUser(String username,String NewPassword){
+    public boolean ModUser(Map<String, String> UserData){
 
-        String Key ="UPDATE `user` SET PASSWORD=? WHERE NAME=?;";
-        return jdbcTemplate.update(Key,NewPassword,username);
+        String Key = "UPDATE `user` SET `password`=? ,`email`=? ,`lines`=? WHERE `name` = ?;";
+        return jdbcTemplate.update(Key,UserData.get("password"),UserData.get("email"),UserData.get("line")
+                ,UserData.get("username"))>0;
 
     }
 
@@ -75,7 +76,7 @@ public class UserDao extends User {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         String Key = "INSERT into`user` (`name`,`password`,`CreationTime`,`email`,`age`,`sex`,`lines`,`jobs`) VALUES(?,?,?,?,?,?,?,?);";
-        return jdbcTemplate.update(Key,UserData.get("username"),getADD_PASSWORD(),formatter.format(date),
+        return jdbcTemplate.update(Key,UserData.get("username"),UserData.get("password"),formatter.format(date),
                 UserData.get("email"),UserData.get("age"),UserData.get("sex"),UserData.get("line"),
                 UserData.get("position"))>0;
 
