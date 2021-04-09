@@ -78,7 +78,7 @@ public class UserDao extends User {
         String Key = "INSERT into`user` (`name`,`password`,`CreationTime`,`email`,`age`,`sex`,`lines`,`jobs`) VALUES(?,?,?,?,?,?,?,?);";
         return jdbcTemplate.update(Key,UserData.get("username"),UserData.get("password"),formatter.format(date),
                 UserData.get("email"),UserData.get("age"),UserData.get("sex"),UserData.get("line"),
-                UserData.get("position"))>0;
+                UserData.get("jobs"))>0;
 
     }
 

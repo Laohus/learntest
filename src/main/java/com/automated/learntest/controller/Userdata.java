@@ -80,7 +80,7 @@ public class Userdata extends Responseinfo {
         TeMap.put("email",request.getParameter("email"));
         TeMap.put("age",request.getParameter("age"));
         TeMap.put("sex",request.getParameter("sex"));
-        TeMap.put("position",request.getParameter("position"));
+        TeMap.put("jobs",request.getParameter("jobs"));
         TeMap.put("line",request.getParameter("line"));
 
         String name = userService.QueryUser(request.getParameter("username"));

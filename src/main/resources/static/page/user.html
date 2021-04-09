@@ -51,7 +51,7 @@
             <label class="layui-form-label">年龄</label>
             <div class="layui-input-inline">
                 <label>
-                    <input type="number" name="age" id="age" placeholder="请输入年龄" lay-verify="required" autocomplete="off" class="layui-input" min="0" max="100" maxlength="32">
+                    <input type="number" name="age" id="age" placeholder="请输入年龄" lay-verify="required" autocomplete="off" class="layui-input" min="1" max="99" oninput="if(value.length>2)value=value.slice(1,2)">
                 </label>
             </div>
         </div>
@@ -66,7 +66,7 @@
             <label class="layui-form-label">岗位职称</label>
             <div class="layui-input-block">
                 <label>
-                    <input type="text" name="position" id="position" lay-verify="required" autocomplete="off" placeholder="请输入职称" class="layui-input" maxlength="12">
+                    <input type="text" name="jobs" id="jobs" lay-verify="required" autocomplete="off" placeholder="请输入职称" class="layui-input" maxlength="12">
                 </label>
             </div>
         </div>
@@ -114,13 +114,8 @@
             ]]
         });
 
-        $(document).on('click','#LAY-component-form-setval',function (){
-            setTimeout(function (){table.reload('usersinfo',{where:{}, page:{curr:1}})},1000)
-        });
 
-
-
-        const json = {};
+        const UserInfo = {};
         let checkStatus;
 
         table.on('checkbox(usersinfo)',function (){
@@ -130,8 +125,8 @@
             for(let i=0; i<checkStatus.data.length; i++){
                 namelist.push(checkStatus.data[i].name)
             }
-            json["name"]=namelist;
-            json["count"]=checkStatus.data.length;
+            UserInfo["name"]=namelist;
+            UserInfo["count"]=checkStatus.data.length;
         });
 
         $(document).on('click','#mod',function (){
@@ -141,21 +136,16 @@
                 });
                 return false;
             }else {
-                document.getElementById("user-content").style.display="block";
-                document.getElementById("username").value=checkStatus.data[0].name;
-                document.getElementById("username").setAttribute("style","background-color:#e6e6e6");
-                document.getElementById("age").value=checkStatus.data[0].age;
-                document.getElementById("age").setAttribute("style","background-color:#e6e6e6");
-                document.getElementById("position").value=checkStatus.data[0].jobs;
-                document.getElementById("position").setAttribute("style","background-color:#e6e6e6");
-                document.getElementById("email").value=checkStatus.data[0].email;
-                document.getElementById("line").value=checkStatus.data[0].lines;
-                document.getElementsByClassName("sex").value=checkStatus.data[0].sex;
-                $('#username').attr("readonly",true);
-                $('#age').attr("readonly",true);
-                $('#position').attr("readonly",true);
+                $("#add").attr("style","display:none");
+                $("#del").attr("style","display:none");
 
+                $('#user-content').attr("style","display:block");
+                $('#username').attr("value",checkStatus.data[0].name).attr("readonly",true).attr("style","background-color:#e6e6e6");
+                $('#age').attr("value",checkStatus.data[0].age).attr("readonly",true).attr("style","background-color:#e6e6e6");
+                $('#jobs').attr("value",checkStatus.data[0].jobs).attr("readonly",true).attr("style","background-color:#e6e6e6");
 
+                $('#email').attr("value",checkStatus.data[0].email);
+                $('#line').attr("value",checkStatus.data[0].lines);
 
                 $("#LAY-component-form-setval").click(function() {
 
@@ -178,42 +168,23 @@
                         content: '确认修改用户账号信息吗？',
                         yes: function(index){
                             layer.close(index);
-                            $.ajax({
-                                url:"/mod/userinfo",
-                                type:"POST",
-                                datatype:"JSON",
-                                contentType:"application/json",
-                                data:JSON.stringify(User),
-                                success:function (data) {
-                                    if(data.code==="0"){
-                                        layer.confirm("修改用户成功！", {
-                                            btn: ['确认']
-                                        });
-                                        document.getElementById("user-content").style.display="none";
-                                        document.getElementById("username").value="";
-                                        document.getElementById("password").value="";
-                                        document.getElementById("email").value="";
-                                        document.getElementById("age").value="";
-                                        document.getElementById("position").value="";
-                                        document.getElementById("line").value="";
+                            ModInfo(User);
+                            setTimeout(function () {
+                                table.reload('usersinfo', {where: {}, page: {curr: 1}});
+                                checkStatus.data.length = 0;
+                                $('#user-content').attr("style","display:none");
+                                clean();
+                                HiddenControls();
 
-                                        setTimeout(function (){table.reload('usersinfo',{where:{}, page:{curr:1}})},1000);
-                                        checkStatus.data.length = 0;
-                                        return true;
-                                    }else {
-                                        layer.confirm(data.errormsg, {
-                                            btn: ['确认']
-                                        });
-                                        return false;
 
-                                    }
-
-                                }
-                            })
+                            }, 1000);
+                            return true;
 
                         }
                     });
+                    return false;
                 });
+                return false;
 
 
             }
@@ -221,115 +192,49 @@
 
         $(document).on('click','#add',function (){
 
-            $('#username').attr("readonly",false).css("background-color","#FFFFFF");
-            $('#age').attr("readonly",false).css("background-color","#FFFFFF");
-            $('#position').attr("readonly",false).css("background-color","#FFFFFF");
-            document.getElementById("username").value="";
-            document.getElementById("age").value="";
-            document.getElementById("position").value="";
-            document.getElementById("email").value="";
-            document.getElementById("line").value="";
+            clean();
+            $("#mod").attr("style","display:none");
+            $("#del").attr("style","display:none");
 
+            $("#LAY-component-form-setval").click(function() {
 
-            $("#LAY-component-form-setval").click(function() {
+                layer.open({
+                    content: '确认新增用户账号吗？',
+                    yes: function (index) {
+                        layer.close(index);
+                        AddInfo();
+                        setTimeout(function () {
+                            table.reload('usersinfo', {where: {}, page: {curr: 1}});
+                            $('#user-content').attr("style","display:none");
+                            clean();
+                            HiddenControls();
 
-                if($("#username").val().length===0){
-                    layer.confirm("用户名项没有输入值！", {
-                        btn: ['确认']
-                    });
-                    return false;
-                }
-
-                if($("#password").val().length===0){
-                    layer.confirm("密码项没有输入值！", {
-                        btn: ['确认']
-                    });
-                    return false;
-                }
-
-                if($("#email").val().length===0){
-                    layer.confirm("邮箱项没有输入值！", {
-                        btn: ['确认']
-                    });
-                    return false;
-                }
-                if($("#age").val().length===0){
-                    layer.confirm("年龄项没有输入值！", {
-                        btn: ['确认']
-                    });
-                    return false;
-                }
-                if($("#position").val().length===0){
-                    layer.confirm("岗位职称项没有输入值！", {
-                        btn: ['确认']
-                    });
-                    return false;
-                }
-                if($("#line").val().length===0){
-                    layer.confirm("所属业务线项没有输入值！", {
-                        btn: ['确认']
-                    });
-                    return false;
-                }
-
-                $.ajax({
-                    url:"/add/userinfo",
-                    type:"POST",
-                    datatype:"JSON",
-                    data: $('#formadd').serialize(),
-                    success:function (data) {
-                        if(data.code==="0"){
-
-                            layer.open({
-                                content: '新增用户成功！',
-                                yes: function(index, layero){
-                                    layer.close(index);
-
-                                    document.getElementById("user-content").style.display="none";
-                                    document.getElementById("username").value="";
-                                    document.getElementById("password").value="";
-                                    document.getElementById("email").value="";
-                                    document.getElementById("age").value="";
-                                    document.getElementById("position").value="";
-                                    document.getElementById("line").value="";
-
-                                }
-                            });
-                            return true;
-                        }else {
-
-                            layer.open({
-                                content: data.errormsg,
-                                yes: function(index, layero){
-                                    layer.close(index);
-                                }
-                            });
-                            return false;
-
-                        }
+                        }, 1000);
+                        return true;
 
                     }
-                })
+                });
+                return false;
+            })
+            return false;
 
-            });
+
 
         });
 
         $(document).on('click','#close',function (){
 
-            $('#username').attr("readonly",false).css("background-color","#FFFFFF");
-            $('#age').attr("readonly",false).css("background-color","#FFFFFF");
-            $('#position').attr("readonly",false).css("background-color","#FFFFFF");
-            document.getElementById("username").value="";
-            document.getElementById("age").value="";
-            document.getElementById("position").value="";
-            document.getElementById("email").value="";
-            document.getElementById("line").value="";
+
+            clean();
+            $("#add").removeAttr("style").css("background-color","#009688");
+            $("#mod").removeAttr("style").css("background-color","#0082c8");
+            $("#del").removeAttr("style").css("background-color","#EA5514");
 
             return true;
 
         });
 
+        // 用户删除
         $(document).on('click','#del',function (){
             if(checkStatus.data.length < 1){
                 layer.confirm("请勾选至少一个用户进行删除！", {
@@ -337,43 +242,21 @@
                 });
                 return false;
             }else {
-
                 layer.open({
                     content: '确认删除用户账号吗？',
                     yes: function(index){
                         layer.close(index);
-                        $.ajax({
-                            url:"/del/userinfo",
-                            type:"POST",
-                            datatype:"JSON",
-                            contentType:"application/json",
-                            data:JSON.stringify(json),
-                            success:function (data) {
-                                if(data.code==="0"){
-                                    layer.confirm("删除用户成功！", {
-                                        btn: ['确认']
-                                    });
-                                    setTimeout(function (){table.reload('usersinfo',{where:{}, page:{curr:1}})},1000);
-                                    checkStatus.data.length = 0;
-                                    return true;
-                                }else {
-                                    layer.confirm(data.errormsg, {
-                                        btn: ['确认']
-                                    });
-                                    return false;
-
-                                }
-
-                            }
-                        })
+                        DelInfo(UserInfo);
+                        checkStatus.data.length = 0;
+                        setTimeout(function (){table.reload('usersinfo',{where:{}, page:{curr:1}})},1000);
+                        return true;
 
                     }
                 });
+                return false;
 
             }
         });
-
-
 
     });
 

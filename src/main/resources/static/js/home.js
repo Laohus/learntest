@@ -1,16 +1,16 @@
-window.onload=function () {
-    const listenopen = document.getElementById("modpassword");
-    const closeopen = document.getElementById("close");
-    const open = document.getElementById("moduser-1");
-
-    listenopen.addEventListener("click",function () {
-        open.style.display = "block";
-    });
-    closeopen.addEventListener("click",function () {
-        open.style.display = "none";
-
-    })
-}
+// window.onload=function () {
+//     const listenopen = document.getElementById("modpassword");
+//     const closeopen = document.getElementById("close");
+//     // const open = document.getElementById("moduser-1");
+//
+//     listenopen.addEventListener("click",function () {
+//         open.style.display = "block";
+//     });
+//     closeopen.addEventListener("click",function () {
+//         open.style.display = "none";
+//
+//     })
+// }
 
 
 // $(document).ready(function() {
