@@ -1,5 +1,8 @@
 
 window.onload=function () {
+
+    Authority();
+
     const listenopen = document.getElementById("add");
     const closeopen = document.getElementById("close");
     const open = document.getElementById("user-content");
@@ -12,57 +15,6 @@ window.onload=function () {
 
     })
 }
-
-// $(document).ready(function() {
-//
-//
-//
-//     $("#LAY-component-form-setval").click(function() {
-//
-//         $.ajax({
-//             url:"/add/userinfo",
-//             type:"POST",
-//             datatype:"JSON",
-//             data: $('#formadd').serialize(),
-//             success:function (data) {
-//                 if(data.code==="0"){
-//
-//                     layer.open({
-//                         content: '新增用户成功！',
-//                         yes: function(index, layero){
-//                             layer.close(index);
-//
-//                             document.getElementById("user-content").style.display="none";
-//                             document.getElementById("username").value="";
-//                             document.getElementById("password").value="";
-//                             document.getElementById("email").value="";
-//                             document.getElementById("age").value="";
-//                             document.getElementById("position").value="";
-//                             document.getElementById("line").value="";
-//
-//                         }
-//                     });
-//                     return true;
-//                 }else {
-//
-//                     layer.open({
-//                         content: data.errormsg,
-//                         yes: function(index, layero){
-//                             layer.close(index);
-//                         }
-//                     });
-//                     return false;
-//
-//                 }
-//
-//             }
-//         })
-//
-//     });
-//
-//
-// });
-
 
 function DelInfo ( UserInfo ){
 
@@ -140,16 +92,7 @@ function ModInfo (UserInfo){
                 layer.confirm("修改用户成功！", {
                     btn: ['确认']
                 });
-                // document.getElementById("user-content").style.display="none";
-                // document.getElementById("username").value="";
-                // document.getElementById("password").value="";
-                // document.getElementById("email").value="";
-                // document.getElementById("age").value="";
-                // document.getElementById("position").value="";
-                // document.getElementById("line").value="";
-                //
-                // setTimeout(function (){table.reload('usersinfo',{where:{}, page:{curr:1}})},1000);
-                // checkStatus.data.length = 0;
+
                 return true;
             }else {
                 layer.confirm(data.errormsg, {

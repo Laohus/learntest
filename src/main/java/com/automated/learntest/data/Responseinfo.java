@@ -9,15 +9,17 @@ public class Responseinfo {
 
     private String ACCOUNT_SUCCESS="success";
 
-
-
     private String ACCOUNT_NO_FOUND="输入的账号不存在，请重新输入！";
 
     private String ACCOUNT_FOUNDED="输入的账号已存在，请重新输入！";
 
+    private String PROJECT_FOUNDED="输入的项目名称已存在，请重新输入！";
+
     private String ACCOUNT_DELERROR="删除账号失败！";
 
     private String ACCOUNT_ERROR="输入的账号密码不正确，请重新输入！";
+
+    private String PROJECT_ERROR="新增项目失败，请重试！";
 
     private String EDITACCOUNT_NEWOLD_NOTSAME="新密码和确认密码输入不一致，请重新输入！";
 
@@ -64,12 +66,16 @@ public class Responseinfo {
         this.ACCOUNT_NO_FOUND=ACCOUNT_NO_FOUND;
     }
 
-    public String getACCOUNT__FOUNDED(){
-        return ACCOUNT_FOUNDED;
-    }
+    public String getACCOUNT__FOUNDED(){ return ACCOUNT_FOUNDED; }
 
     public void setACCOUNT_FOUNDED(String ACCOUNT_FOUNDED){
         this.ACCOUNT_FOUNDED=ACCOUNT_FOUNDED;
+    }
+
+    public String getPROJECT_FOUNDED(){ return PROJECT_FOUNDED; }
+
+    public void setPROJECT_FOUNDED(String PROJECT_FOUNDED){
+        this.PROJECT_FOUNDED=PROJECT_FOUNDED;
     }
 
     public String getACCOUNT_DELERROR(){
@@ -86,6 +92,14 @@ public class Responseinfo {
 
     public void setACCOUNT_ERROR(String ACCOUNT_ERROR){
         this.ACCOUNT_ERROR=ACCOUNT_ERROR;
+    }
+
+    public String getPROJECT_ERROR(){
+        return PROJECT_ERROR;
+    }
+
+    public void setPROJECT_ERROR(String PROJECT_ERROR){
+        this.PROJECT_ERROR=PROJECT_ERROR;
     }
 
     public String getEDITACCOUNT_NEWOLD_NOTSAME(){

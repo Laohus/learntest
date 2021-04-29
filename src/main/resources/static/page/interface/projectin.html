@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>项目</title>
+
+    <link rel="stylesheet" href="../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../css/projectin.css">
+    <link rel="stylesheet" href="../../layui/css/modules/layer/default/layer.css" media="all">
+
+
+    <script src="../../js/jquery.min.js" type="text/javascript"></script>
+    <script src="../../js/projectin.js"></script>
+    <script src="../../js/PublicEfficacy.js"></script>
+
+
+</head>
+<body>
+
+
+<div class="userinfo">
+    <div class="layui-btn layui-btn-lg layui-btn-normal" style="background-color: #009688;" id="addproject"><a style="color: black">新增</a></div>
+</div>
+
+<div id="user-content" class="user-content" style="background-color: white;display: none">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+        <legend>新增</legend>
+    </fieldset>
+    <form class="layui-form layui-form-pane" lay-filter="userinfo" id="formadd" method="post">
+        <div class="layui-form-item">
+            <label class="layui-form-label">项目名称</label>
+            <div class="layui-input-block">
+                <label>
+                    <input type="text" name="project" id="project" autocomplete="off" lay-verify="required"  placeholder="请输入项目名称" class="layui-input" maxlength="12">
+                </label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">项目内容</label>
+            <div class="layui-input-block">
+                <label>
+                    <input type="text" name="content" id="content" autocomplete="off" lay-verify="required" placeholder="请输入项目内容" class="layui-input" maxlength="60">
+                </label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <button type="button" lay-event="layadd" class="layui-btn" id="LAY-component-form-setval" lay-submit lay-filter="addinfo">保&emsp;&emsp;存</button>
+            <button type="reset" class="layui-btn layui-btn-primary" id="close">关&emsp;&emsp;闭</button>
+        </div>
+    </form>
+</div>
+
+<div class="layui-bg-gray2" style="padding: 30px;" id="layui-bg-gray">
+    <div class="layui-row layui-col-space15" id="add_card">
+    </div>
+</div>
+<script src="../../layui/layui.js"></script>
+<script src="../../layui/lay/modules/layer.js"></script>
+
+</body>
+</html>

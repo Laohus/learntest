@@ -1,0 +1,70 @@
+body,
+html {
+    margin: 0;
+    height: 100%
+}
+
+
+p {
+    margin: 10px 0;
+    color: inherit
+}
+
+.inpit {
+    background-color: white;
+    position: relative;
+    height: 100%
+}
+
+.inpit .li {
+    margin: 0 auto;
+    min-width: 200px;
+    padding: 20px 0;
+    display: flow-root
+}
+
+.inpit .li>div[name][value],
+.inpit .li>div.add {
+    cursor: pointer;
+    transition: transform 0.2s ease-in, box-shadow 0.2s ease-out;
+    width: calc(25% - 64px);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.2);
+    float: left;
+    background-color: #fff;
+    padding: 10px 20px;
+    border: 2px dashed #dcdcdc;
+    border-radius: 4px;
+    margin: 0 10px 20px
+}
+
+.inpit .li>div.ack[name][value],
+.inpit .li>div.active[name][value]{
+    box-shadow: 0 3px 20px rgba(156, 86, 241, 0.43);
+    transform: scale(1.05);
+    border: 2px solid #f8b500;
+    background-color: #f8b500;
+    color: #fff;
+    animation: scales 0.3s
+}
+
+@keyframes scales {
+    0% {
+        transform: scale(1)
+    }
+    50% {
+        transform: scale(1.25)
+    }
+    100% {
+        transform: scale(1)
+    }
+}
+
+.inpit>div {
+    position: relative;
+    overflow: hidden;
+    width: 800px;
+    display: flow-root;
+    background-color: #fff;
+    padding: 10px 30px 50px 30px;
+    margin: 0 auto
+}

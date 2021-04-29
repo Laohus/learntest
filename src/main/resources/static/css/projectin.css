@@ -1,0 +1,38 @@
+body{
+    background-color: #F8F9FC;
+
+}
+
+.layui-card{
+    background-color: white;
+}
+.layui-bg-gray2{
+    background-color: white;
+}
+
+.layui-card span{
+    color: #f8b500;
+    font-weight: bold;
+    font-size: medium;
+}
+.layui-card .number{
+    color: black;
+    font-weight: bold;
+    font-size: medium;
+}
+.layui-card-body{
+    color: black;
+    font-weight: bold;
+}
+
+#layui-bg-gray{
+
+    background-color: #F8F9FC;
+
+}
+
+.formitem input{
+    line-height: 24px;
+    padding: 15px 20px;
+}
+

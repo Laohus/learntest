@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @ResponseBody
@@ -50,37 +54,27 @@ public class ModUser extends Responseinfo {
 
     }
 
-//    @RequestMapping("/Home/ModUser")
-//    public Resultinfo HomeModUser(HttpServletRequest request, HttpSession session){
-//
-//        Resultinfo result = new Resultinfo();
-//
-//        String FirstPassword = request.getParameter("FirstPassword");
-//        String SecondPassword = request.getParameter("SecondPassword");
-//        if(!FirstPassword.equals(SecondPassword)){
-//            result.setCode(getFAIL_CODE());
-//            result.setErrormsg(getEDITACCOUNT_NEWOLD_NOTSAME());
-//            return result;
-//        }
-//
-//        String UserName = (String) session.getAttribute("username");
-//        String ResultMod = userService.QueryUserPass(UserName,FirstPassword);
-//
-//        if(!ResultMod.equals("1")){
-//            int res = userService.ModUser(UserName,FirstPassword);
-//            if(res==1){
-//                result.setCode(getSUCCESS_CODE());
-//                result.setMsg(getACCOUNT_SUCCESS());
-//            }else {
-//                result.setCode(getFAIL_CODE());
-//                result.setErrormsg(getACCOUNT_ERROR());
-//            }
-//
-//        }else {
-//            result.setCode(getFAIL_CODE());
-//            result.setErrormsg(getEDITACCOUNT_NEWOLD_SAME());
-//        }
-//        return result;
-//
-//    }
+    @RequestMapping("/Functional/Authority")
+    public Resultinfo LoginAuthority (HttpSession session){
+
+        Resultinfo result = new Resultinfo();
+
+        String username = (String) session.getAttribute("username");
+
+        Map<String,Boolean> AuthorityMap = new HashMap<>();
+
+        boolean Userinfo = false;
+
+        if(username.equals("admin")){
+            Userinfo = true;
+
+        }
+        AuthorityMap.put("Userinfo",Userinfo);
+        result.setCode(getSUCCESS_CODE());
+        result.setMsg(getACCOUNT_SUCCESS());
+        result.setData(AuthorityMap);
+        return result;
+
+    }
+
 }
